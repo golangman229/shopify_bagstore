@@ -1,0 +1,216 @@
+<div class="container-fluid ctm-video-sliders type">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="off">{{ section.settings.section_off }}%<br> off</div>
+      <h2>{{ section.settings.section_title }}</h2>
+      <p>{{ section.settings.section_text_ques }}</p>
+      <p>{{ section.settings.section_text_ans }}</p>
+      <a href="{{ section.settings.section_link }}">Take Quiz</a>
+    </div>
+
+    <div class="col-sm-8">
+      <div class="row myproducts">
+        {% for block in section.blocks %}
+          {% if block.type == 'prod' %}
+            <div class="col-sm-6">
+              <div class="product" data-product-id="{{ product.id }}">
+                <div class="row">
+                  <div class="col-sm-10">
+                    <h3>{{ block.settings.prod_name }}</h3>
+                  </div>
+                  <div class="col-sm-2">
+                    <p class="price">{{ block.settings.prod_price }}</p>
+                  </div>
+                </div>
+                <p class="mydews">{{ block.settings.prod_description }}</p>
+                <div class="col-sm-12 asds video-container">
+                  <!-- Thumbnail image -->
+                  <img class="thumbnail" src="{{ block.settings.prod_image | img_url:'master' }}" alt="Thumbnail">
+                  <!-- Video element -->
+                  {{ block.settings.videos | video_tag: loop: true, autoplay: true, inline: true, muted: true, controls: false }}
+                </div>
+                <div class="variant" data-variant-id="{{ variant.id }}">
+                  <p>Available Colors:<br>
+                    <!-- <img class="colimg" src="https://cdn.shopify.com/s/files/1/0569/1310/0889/files/Frame_1888.png?v=1706689524" alt="asd"/> -->
+                  </p>
+                  <div class="row" style="justify-content:center;">
+                    <div class="col-sm-1 toolss">
+                      <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Reflective black">
+                        <img src="https://cdn.shopify.com/s/files/1/0569/1310/0889/files/slider_items.png?v=1707121436" alt="asd"> 
+                        </button> 
+                    </div>
+                    
+                    <div class="col-sm-1 toolss">
+                      <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Black">
+                        <img src="https://cdn.shopify.com/s/files/1/0569/1310/0889/files/Ellipse_78.png?v=1707121754" alt="asd"> 
+                        </button> 
+                    </div>
+
+                    <div class="col-sm-1 toolss">
+                      <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Blue">
+                        <img src="https://cdn.shopify.com/s/files/1/0569/1310/0889/files/Ellipse_78_1.png?v=1707122024" alt="asd"> 
+                        </button> 
+                    </div>
+
+                    <div class="col-sm-1 toolss">
+                      <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Red">
+                        <img src="https://cdn.shopify.com/s/files/1/0569/1310/0889/files/Ellipse_78_2.png?v=1707122023" alt="asd"> 
+                        </button> 
+                    </div>
+
+                    <div class="col-sm-1 toolss">
+                      <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Pink">
+                        <img src="https://cdn.shopify.com/s/files/1/0569/1310/0889/files/Ellipse_78_3.png?v=1707122023" alt="asd"> 
+                        </button> 
+                    </div>
+
+                      <div class="col-sm-1 toolss">
+                      <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="White">
+                        <img src="https://cdn.shopify.com/s/files/1/0569/1310/0889/files/Ellipse_78_4.png?v=1707122024" alt="asd"> 
+                        </button> 
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endif %} 
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Style for the video container */
+  .type .video-container {
+      position: relative;
+      width: 600px;
+      height: 400px;
+      overflow: hidden;
+  }
+
+  /* Style for the thumbnail image */
+  .type .thumbnail {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.3s ease;
+    display:none !important;
+  }
+
+  .type .col-sm-12.asds {
+      height: 600px;
+  }
+
+  /* Hide the thumbnail on hover */
+  .type .video-container:hover .thumbnail {
+      display: block !important;
+  }
+
+  /* Style for the video element */
+  .type .video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block !important;
+      z-index: 2; /* Place the video above the thumbnail and play button */
+      background-color: black; /* Set a background color for the video */
+  }
+
+  /* Show the video on hover */
+  .type .video-container:hover .video {
+      display: none !important;
+  }
+</style>
+
+<script>
+
+</script>
+
+    {% schema %}
+{
+  "name": "My Type",
+  "settings": [
+    {
+      "type": "text",
+      "label": "Section Title",
+      "id": "section_title",
+      "default": "Find"
+    },
+    {
+      "type": "text",
+      "label": "Section Text",
+      "id": "section_text_ques",
+      "default": "Edit Text Ques"
+    },
+    {
+      "type": "text",
+      "label": "Section Text",
+      "id": "section_text_ans",
+      "default": "Edit Text Ans"
+    },
+    {
+      "type": "text",
+      "label": "Off Percentage",
+      "id": "section_off",
+      "default": "Percentage Here"
+    }
+    ,
+    {
+      "type": "text",
+      "label": "Section Button Link",
+      "id": "section_link",
+      "default": "Link Here"
+    }
+    
+  ],
+   "blocks": [
+    {
+      "type": "prod",
+      "name": "prod Slide",
+      "settings": [
+         {
+          "type": "text",
+          "label": "prod Name",
+          "id": "prod_name",
+          "default": "prod Name"
+        },
+        
+        {
+          "type": "text",
+          "label": "Prod Description",
+          "id": "prod_description",
+          "default": "Prod Description"
+        },
+         {
+          "type": "text",
+          "label": "Prod Price",
+          "id": "prod_price",
+          "default": "Prod Price"
+        },
+        {
+      "type": "video",
+      "label": "Video",
+      "id": "videos"
+        },
+        
+        {
+      "type": "image_picker",
+      "label": "Prod Image",
+      "id": "prod_image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "my-prods",
+      "category": "Custom"
+    }
+  ]
+ 
+}
+{% endschema %}
+
+

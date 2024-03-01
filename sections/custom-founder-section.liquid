@@ -1,0 +1,100 @@
+<div class="ctm-founder-box-section" style="background-color: #ebf0fc; border-radius: 20px; ">
+
+   <div class="row">
+      
+      <div class="ctm-founder-left-text">
+        <h2> {{ section.settings.section_title }} </h2>
+        <p> {{ section.settings.section_para }} </p>
+        <a href=" {{ section.settings.button_link }} " class="ctm-btn"> {{ section.settings.button_text }} </a>
+      </div>
+
+      <div class="founder-tilt-image">
+         <img src="{{ section.settings.author_image | img_url:'master' }}" alt="asd">
+      </div>
+
+      <div class="founder-details">
+        <img src="{{ section.settings.arrow_image | img_url:'master' }}" alt="asd">
+        <div class="foundertextt">
+          <h3> {{ section.settings.text01 }} </h3>
+          <h2> {{ section.settings.text02 }} </h2>
+          <h3> {{ section.settings.text03 }} </h3>
+        </div>
+      </div>
+      
+    </div>
+
+</div>
+
+
+
+
+
+{% schema %}
+{
+  "name": "Custom Founder Section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "label": "Section Title",
+      "id": "section_title",
+      "default": "Image Boxes"
+    },
+    {
+      "type": "text",
+      "label": "Section Para",
+      "id": "section_para",
+      "default": "Lorem Ipsum"
+    },
+    {
+      "type": "text",
+      "label": "Button Text",
+      "id": "button_text"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "image_picker",
+      "id": "author_image",
+      "label": "Image"
+    },
+        {
+      "type": "image_picker",
+      "id": "arrow_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "label": "Text",
+      "id": "text01",
+      "default": "Lorem Ipsum"
+    },
+    {
+      "type": "text",
+      "label": "Text",
+      "id": "text02",
+      "default": "Lorem Ipsum"
+    },
+    {
+      "type": "text",
+      "label": "Text",
+      "id": "text03",
+      "default": "Lorem Ipsum"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Founder Section",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+

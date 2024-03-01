@@ -1,0 +1,86 @@
+.t4s-page-head:before {
+    content: '';
+    position: absolute;
+    background-color: var(--bg-overlay);
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+.t4s-page-head .t4s-title-head:last-child {
+    margin-bottom: 0;
+}
+ul.pagination-page.page-numbers { 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 30px;
+}
+ul.t4s-breadcrumbs__list {
+    justify-content: center;
+    color: #aaa; 
+    margin: 0 -3px 5px;
+    padding: 0;
+}
+li.t4s-breadcrumbs__item {
+    margin: 0 3px;
+    display: inline-block;
+} 
+.t4s-breadcrumbs__list svg.t4s-icon-arrow {
+    width: 9px;
+    margin-left: 3px;
+    stroke: var(--brc-cl);
+    fill: var(--brc-cl);
+}
+.t4s-page-section-heading{
+    background-repeat: var(--bg_repeat);
+    background-size:var(--bg_size);
+    background-position: var(--bg_pos);
+    padding-top: var(--space-padding-top-mb);
+    padding-bottom: var(--space-padding-bottom-mb);
+    margin-bottom:var(--space-mgb-mb);
+}
+.t4s-page-head .t4s-breadcrumbs{
+    margin-bottom: var(--brc-mgb-mb);
+}
+.t4s-page-head .t4s-breadcrumbs__item{color:var(--brc-cl)}
+.t4s-page-head .t4s-breadcrumbs__item a{color:var(--brc-cl-link);}
+.t4s-page-head .t4s-desc-head p { margin-bottom: 0;}
+a.t4s-cl-des-viewm {
+    color: inherit;
+    border-bottom: 1px solid;
+}
+.t4s-desc-head {
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.t4s-uppercase-true {text-transform: uppercase;}
+@media (min-width: 768px) and (max-width: 1024px) {
+    .t4s-page-section-heading {
+        padding-top: var(--space-padding-top-tb);
+        padding-bottom: var(--space-padding-bottom-tb);
+        margin-bottom:var(--space-mgb-tb);
+    }
+    .t4s-page-head .t4s-breadcrumbs{
+        margin-bottom: var(--brc-mgb-tb);
+    }
+}
+@media (min-width: 1025px){
+    .t4s-page-section-heading {
+        padding-top: var(--space-padding-top-dk);
+        padding-bottom: var(--space-padding-bottom-dk);
+        margin-bottom:var(--space-mgb-dk);
+    }
+    .t4s-page-head .t4s-breadcrumbs{
+        margin-bottom: var(--brc-mgb);
+    }
+}
+@media (-moz-touch-enabled: 0), (hover: hover) and (min-width: 1025px){
+    a.t4s-cl-des-viewm:hover {
+        opacity: 0.8;
+    }
+    .t4s-page-head .t4s-breadcrumbs__item:hover,
+    .t4s-page-head .t4s-breadcrumbs__item a:hover{opacity: 0.8;}
+}

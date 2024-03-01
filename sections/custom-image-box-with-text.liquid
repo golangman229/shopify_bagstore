@@ -1,0 +1,82 @@
+<div class="ctm-image-box-section">
+ 
+<div class="t4s-container">
+    <h2> {{ section.settings.section_title }} </h2>
+   <!-- <div> <span> <img src="https://cdn.shopify.com/s/files/1/0569/1310/0889/files/Frame_10744.png?v=1706309332" alt="+">  </span> </div> -->
+
+   <div class="row">
+
+      {% for block in section.blocks %}
+  {% if block.type == 'image_box' %}
+    
+     <div class="image-box-col image-box">
+       <img src="{{ block.settings.image_with_text_image | img_url:'master' }}" alt="asd">
+       <h3> {{ block.settings.image_title }} </h3>
+     </div>
+     <div class="plus-icon">
+       <img src="https://cdn.shopify.com/s/files/1/0569/1310/0889/files/plus-icon.png?v=1706297228">
+     </div>
+
+     {% endif %} 
+  {% endfor %}
+     
+   </div>
+  
+  
+  <div class="ctm-btn">
+	<a href="{{ section.settings.button_link }}">{{ section.settings.button_text }}</a>
+</div>
+    
+  
+</div>
+ </div>
+
+{% schema %}
+{
+  "name": "Custom Image Box Section",
+  "settings": [
+    {
+      "type": "text",
+      "label": "Section Title",
+      "id": "section_title",
+      "default": "Image Boxes"
+    },
+    {
+      "type": "text",
+      "label": "Button Text",
+      "id": "button_text"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image_box",
+      "name": "Image Box",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image_with_text_image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "label": "Image Title",
+          "id": "image_title",
+          "default": "Image Title"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Image Box Section",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+

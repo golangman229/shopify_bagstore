@@ -1,0 +1,138 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-auto-scroll@0.5.3/dist/js/splide-extension-auto-scroll.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+
+
+<section class="ctm-slider-with-text-scrolling-section" style="background: {{ section.settings.section_background_color }};">
+ <div class="container-fluid">
+   <h2 style="color: {{ section.settings.section_title_color }};" class="ctm-slider-with-text-scrolling-title">{{ section.settings.section_title }}</h2>
+   <div class="container">
+
+     
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+
+        <div class="ctm-scrolling-text">
+          <div class="splide">
+            <div class="splide__track" id="splide-track">
+               <ul class="splide__list">
+                    {% for block in section.blocks %}
+                {% if block.type == 'scroll_text' %} 
+                  <li class="splide__slide" style="color: {{ section.settings.scroll_text_color }};">{{ block.settings.add_text }}   </li>
+                    {% endif %}
+              {% endfor %}
+                </ul>
+            </div>
+          </div>
+        </div> 
+
+    </div>
+   </div>
+   
+ </div>
+</section>
+
+
+<style>
+.ctm-slider-with-text-scrolling-section {
+  padding:10px 0;
+}   
+  .splide__arrow {
+    display: none;
+}
+/* section.ctm-slider-with-text-scrolling-section h2 {
+    font-size: 42px;
+    margin-bottom: 60px !important;
+} */
+.splide__pagination__page {
+    display: none;
+}
+.ctm-scrolling-text li{
+    font-size:15px;
+    font-weight:400;
+    width: auto !important;
+    padding: 0px 20px;
+  font-family: 'Permanent Marker', cursive; 
+}
+.ctm-scrolling-text  li:after {
+    content: "";
+    /* background-color: #000;
+    background-repeat: no-repeat;
+    background-size: cover; */
+    width: 0.25rem;
+    height: 0.25rem;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(50%,-50%);
+    mask-image: none;
+    border-radius: 100%;
+    background: {{ section.settings.scroll_dot_color }};
+}
+</style>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+  new Splide('.splide', {
+    type   : 'loop',
+    drag   : 'free',
+    focus  : 'center',
+    perPage: 10,
+    autoScroll: {
+      speed: 1.5,
+    },
+  }).mount( window.splide.Extensions );
+});
+</script>
+
+{% schema %}
+{
+  "name": "Text Scrolling Slider",
+  "settings": [
+    {
+      "type": "text",
+      "label": "Section Title",
+      "id": "section_title"
+    },
+    {
+      "type": "color",
+      "label": "Section Background Color",
+      "id": "section_background_color"
+    },
+    {
+      "type": "color",
+      "label": "Section Title Color",
+      "id": "section_title_color"
+    },
+    {
+      "type": "color",
+      "label": "Scroll Text Color",
+      "id": "scroll_text_color"
+    },
+    {
+      "type": "color",
+      "label": "Scroll Dot Color",
+      "id": "scroll_dot_color"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "scroll_text",
+      "name": "Add Scroll Text",
+      "settings": [
+        {
+          "type": "text",
+          "label": "Add Text",
+          "id": "add_text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Text Scrolling Slider",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

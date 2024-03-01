@@ -1,0 +1,100 @@
+{
+  "sections": {
+    "heading": {
+      "type": "heading-static",
+      "blocks": {
+        "7b5146f4-dbe6-43f0-8a48-d29d083c0176": {
+          "type": "1",
+          "settings": {
+            "tag": "h3",
+            "fontf": "2",
+            "text_cl": "#ffffff",
+            "text_fs": 20,
+            "text_lh": 26,
+            "text_fw": 500,
+            "text_ls": 2,
+            "mgb": 0,
+            "font_italic": false,
+            "font_uppercase": false,
+            "text_shadow": false,
+            "text_fs_tb": 20,
+            "text_lh_tb": 26,
+            "text_ls_tb": 2,
+            "mgb_tb": 0,
+            "hidden_mobile": false,
+            "text_fs_mb": 20,
+            "text_lh_mb": 26,
+            "text_ls_mb": 2,
+            "mgb_mb": 0
+          }
+        }
+      },
+      "block_order": [
+        "7b5146f4-dbe6-43f0-8a48-d29d083c0176"
+      ],
+      "settings": {
+        "image": "shopify:\/\/shop_images\/shop-banner.jpg",
+        "parallax": false,
+        "bg_overlay": "#000000",
+        "bg_opacity": 54,
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "padding_top_tb": 50,
+        "padding_bottom_tb": 50,
+        "padding_top_mb": 50,
+        "padding_bottom_mb": 50,
+        "bg_pos": "center center",
+        "bg_repeat": "no-repeat",
+        "bg_size": "cover",
+        "mgb": 0,
+        "mgb_tb": 0,
+        "mgb_mb": 0
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "layout": "t4s-container-wrap",
+        "cl_bg": "",
+        "cl_bg_gradient": "",
+        "mg": "60px,,60px,",
+        "pd": "",
+        "mg_tb": "60px,,60px,",
+        "pd_tb": "",
+        "mg_mb": "60px,,60px,",
+        "pd_mb": ""
+      }
+    },
+    "sidebar-page": {
+      "type": "sidebar-page",
+      "blocks": {
+        "f69681ed-b75e-42de-be58-fdf73b3b7e08": {
+          "type": "blog_cate",
+          "settings": {
+            "title": "Blog categories",
+            "cat_link_list": "",
+            "count": true
+          }
+        }
+      },
+      "block_order": [
+        "f69681ed-b75e-42de-be58-fdf73b3b7e08"
+      ],
+      "disabled": true,
+      "settings": {
+        "enable_drawer": false,
+        "space": 50,
+        "size": "medium",
+        "br_style": "none",
+        "brcolor": "#222222",
+        "sidebar_bdr": 5,
+        "sidebar_pd": 10
+      }
+    }
+  },
+  "order": [
+    "heading",
+    "main",
+    "sidebar-page"
+  ]
+}

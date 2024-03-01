@@ -1,0 +1,231 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js">
+<div class="container-fluid ctm-video-sliders">
+  <div class="row">
+    <div class="col-sm-4 folows">
+      <h2>{{ section.settings.section_title }}</h2>
+      <p>{{ section.settings.section_text_ques }}</p>
+ <p>{{ section.settings.section_text_ans }}</p>
+
+      <div class="row chngedd">
+        <div class="col-sm-2">Instagram</div>
+        <div class="col-sm-2">
+              <div class="switch-container">
+              <input type="checkbox" class="switch-input" id="switch">
+              <div class="switch-track" id="switch-track">
+                 <div class="switch-handle"></div> 
+              </div>
+              </div>
+        </div>
+        <div class="col-sm-2">Tiktok</div>
+      </div>
+
+      <a href="{{ section.settings.section_link }}"> Follow us <img src="https://cdn.shopify.com/s/files/1/0569/1310/0889/files/Vector_64c9c662-0697-4a3c-b3b0-f57a76f22dec.png?v=1706712985"></a>
+      <a href="{{ section.settings.section_link1 }}"> Follow us <img src="https://cdn.shopify.com/s/files/1/0569/1310/0889/files/Vector.png?v=1706705727"></a>
+    </div>
+
+   <div class="col-sm-8 ins" id="yourColElement">
+      <div class="row inss folowslides">
+         {% for block in section.blocks %}
+    {% if block.type == 'follow' %}
+        <div class="col-sm-12">
+          <img src="{{ block.settings.insta_image | img_url:'master' }}" alt="asd">
+          <h2>{{ block.settings.insta_name}}</h2>
+        </div>
+          {% endif %}
+  {% endfor %}
+      </div>
+
+     <div class="row tikk folowslides">
+        {% for block in section.blocks %}
+    {% if block.type == 'follow' %}
+        <div class="col-sm-12">
+          <img src="{{ block.settings.tiktok_image | img_url:'master' }}" alt="asd">
+          <h2>{{ block.settings.tiktok_name}}</h2>
+        </div>
+            {% endif %}
+  {% endfor %}
+      </div>
+    </div>
+    
+    </div>
+   </div>
+
+  <script>
+ $(document).ready(function () {
+        $('#switch-track').on('click', function () {
+            $('#switch').prop('checked', !$('#switch').prop('checked'));
+
+            // Get the col-sm-8 element
+            var colElement = $('#yourColElement');
+
+            // Toggle the classes based on the checkbox state
+            if ($('#switch').prop('checked')) {
+                colElement.addClass('tik').removeClass('ins');
+            } else {
+                colElement.removeClass('tik').addClass('ins');
+            }
+        });
+    });
+
+
+
+      jQuery(document).ready(function($) {
+      $('.folowslides').slick({
+        dots: true,
+        infinite: true,
+        speed: 1000,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        arrows: false,
+        responsive: [{
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1
+          }
+        },
+        {
+           breakpoint: 400,
+           settings: {
+              arrows: false,
+              slidesToShow: 1,
+              slidesToScroll: 1
+           }
+        }]
+    });
+});
+    </script>
+ <style>
+        /* Style for the switch container */
+        .switch-container {
+            display: inline-block;
+            position: relative;
+        }
+
+        /* Style for the switch input */
+        .switch-input {
+            display: none;
+        }
+
+        /* Style for the switch track */
+       .switch-track {
+    width: 52px;
+    height: 22px;
+    background-color: #ccc;
+    border-radius: 15px;
+    position: absolute;
+    cursor: pointer;
+         top: -14px;
+}
+
+        /* Style for the switch handle */
+       .switch-handle {
+    width: 17px;
+    height: 17px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s ease-in-out;
+}
+
+        /* Style for the switch input when it's checked (on state) */
+        .switch-input:checked + .switch-track {
+            background-color: #2A386D; /* Green color for on state */
+        }
+
+        /* Style for the switch handle when it's in the on state */
+        .switch-input:checked + .switch-track .switch-handle {
+            transform: translateX(30px); /* Move the handle to the right for on state */
+        }
+
+   .ins .tikk{
+     display:none ;
+   }
+   .tik .inss{
+     display:none;
+   }
+
+    </style>
+
+
+    {% schema %}
+{
+  "name": " Follow Slides",
+  "settings": [
+     {
+      "type": "text",
+      "label": "Section Title",
+      "id": "section_title",
+      "default": "Find"
+    },
+    {
+      "type": "text",
+      "label": "Section Text",
+      "id": "section_text_ques",
+      "default": "Edit Text Ques"
+    },
+    {
+      "type": "text",
+      "label": "Section Text",
+      "id": "section_text_ans",
+      "default": "Edit Text Ans"
+    },
+    {
+      "type": "text",
+      "label": "Section Button Link",
+      "id": "section_link",
+      "default": "Link Here"
+    },
+    {
+      "type": "text",
+      "label": "Section Button Link",
+      "id": "section_link1",
+      "default": "Link Here"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "follow",
+      "name": "Tiktok Slide",
+      "settings": [
+         {
+          "type": "text",
+          "label": "Insta Name",
+          "id": "insta_name",
+          "default": "insta Name"
+        },
+        
+        {
+      "type": "image_picker",
+      "label": "Insta Image",
+      "id": "insta_image"
+        },
+
+         {
+          "type": "text",
+          "label": "Tiktok Name",
+          "id": "tiktok_name",
+          "default": "tiktok Name"
+        },
+        
+        {
+      "type": "image_picker",
+      "label": "Tiktok Image",
+      "id": "tiktok_image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "follow-slider",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+

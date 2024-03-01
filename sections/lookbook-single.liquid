@@ -1,0 +1,754 @@
+<!-- sections/lookbool-single.liquid -->
+{{ 't4s-lookbook.css' | asset_url | stylesheet_tag }}
+{{ 't4s-section.css' | asset_url | stylesheet_tag }}
+{{ 't4s-collection-products.css' | asset_url | stylesheet_tag }}
+<link href="{{ 't4s-base-drop.min.css' | asset_url }}" rel="stylesheet" media="print" onload="this.media='all'">
+{%- liquid
+    assign sid = section.id
+    assign se_stts = section.settings 
+    assign image_mb = se_stts.image_mb
+    assign image = se_stts.image | default: image_mb
+    assign mb_image = image_mb | default: image 
+    assign stt_layout = se_stts.layout
+    assign stt_image_bg = se_stts.image_bg
+    if stt_layout == 't4s-se-container' 
+        assign html_layout = '<div class="t4s-container">__</div></div>' | split: '__'
+        assign size_img = '(min-width: 1800px) 1800px, 100vw'
+    elsif stt_layout == 't4s-container-wrap'
+        assign html_layout = '<div class="t4s-container">__</div>' | split: '__'
+        assign size_img = '(min-width: 1800px) 1800px, 100vw'
+    else
+      assign html_layout = '__' | split: '__'
+      assign size_img = '100vw'
+    endif
+    assign root_url = routes.root_url 
+    if root_url != '/'
+      assign root_url = root_url | append: '/'
+    endif 
+ -%}
+<div class="t4s-section-inner t4s_nt_se_{{ sid }} {{ stt_layout }} {% if stt_image_bg != blank and stt_layout != 't4s-se-container' %} t4s-has-imgbg lazyloadt4s{% endif %}" {% if stt_image_bg != blank and stt_layout != 't4s-se-container' %} data-bgset="{{ stt_image_bg | image_url: width: 1 }}" data-sizes="auto"  data-optimumx="2"{% endif %} {% render 'section_style', se_stts: se_stts %}>
+  {{- html_layout[0] -}}
+  {%- if stt_layout == 't4s-se-container' -%}<div class="t4s-container-inner{% if stt_image_bg != blank %} t4s-has-imgbg lazyloadt4s{% endif %}" {% if stt_image_bg != blank %} data-bgset="{{ stt_image_bg | image_url: width: 1 }}" data-sizes="auto"  data-optimumx="2"{% endif %}>{% endif -%}
+{%- render 'section_tophead', se_stts: se_stts -%}
+    <div class="t4s-pr t4s-lookbook-wrapper t4s_ratio_mix t4s_ratioadapt_mix t4s_ratio_cuspx_mb_false t4s_ratio_cuspx_tb_false t4s_ratio_cuspx_false" timeline hdt-reveal="slide-in">
+        <div class="t4s-lookbook-img t4s-oh t4s_cover" style="--ratioapt: {{ image.aspect_ratio | default: 1.7777 }};--ratioaptmb: {{ mb_image.aspect_ratio | default: 1.7777 }};">
+            {%- if image != blank -%}
+                {%- liquid
+                    assign img_url_w     = image | image_url: width: 1904 | split: '1904'
+                    assign img_url_w0    = img_url_w[0]
+                    assign img_url_w1    = img_url_w[1]
+                    assign img_url_w_mb  = mb_image | image_url: width: 1904 | split: '1904'
+                    assign img_url_w_mb0 = img_url_w_mb[0]
+                    assign img_url_w_mb1 = img_url_w_mb[1] 
+                    assign img_1         = img_url_w0 | append: 1 | append: img_url_w1
+                    assign img_1_mb      = img_url_w_mb0 | append: 1 | append: img_url_w_mb1
+                    assign url_img       = 'url(' | append: img_1 | append: ')'
+                    assign url_img_mb    = 'url(' | append: img_1_mb | append: ')'
+               -%}
+                <img class="t4s-img-as-bg t4s-d-md-none lazyloadt4sNative t4s-lz--fadeIn"
+                    srcset="{{ img_url_w_mb0 }}375{{ img_url_w_mb1 }} 375w, {{ img_url_w_mb0 }}550{{ img_url_w_mb1 }} 550w, {{ img_url_w_mb0 }}750{{ img_url_w_mb1 }} 750w, {{ img_url_w_mb0 }}1100{{ img_url_w_mb1 }} 1100w, {{ img_url_w_mb0 }}1500{{ img_url_w_mb1 }} 1500w, {{ img_url_w_mb0 }}1780{{ img_url_w_mb1 }} 1780w, {{ img_url_w_mb0 }}2000{{ img_url_w_mb1 }} 2000w, {{ img_url_w_mb0 }}3000{{ img_url_w_mb1 }} 3000w,{{ img_url_w_mb0 }}3840{{ img_url_w_mb1 }} 3840w, {{ mb_image | image_url }} {{ mb_image.width }}w"
+                    sizes="(min-width: 768pxpx) 768px,100vw" src="{{ img_url_w_mb0 }}1500{{ img_url_w_mb1 }}"
+                    loading="lazy" onload="loadImageT4s(this)" alt="{{ mb_image.alt | escape }}" width="{{ mb_image.width }}" height="{{ mb_image.height }}">
+                <span class="lazyloadt4s-loader is-bg-img t4s-d-md-none" style="background: {{ url_img_mb }}"></span>
+                <img class="t4s-img-as-bg t4s-d-none t4s-d-md-block lazyloadt4sNative t4s-lz--fadeIn"
+                    srcset="{{ img_url_w0 }}375{{ img_url_w1 }} 375w, {{ img_url_w0 }}550{{ img_url_w1 }} 550w, {{ img_url_w0 }}750{{ img_url_w1 }} 750w, {{ img_url_w0 }}1100{{ img_url_w1 }} 1100w, {{ img_url_w0 }}1500{{ img_url_w1 }} 1500w, {{ img_url_w0 }}1780{{ img_url_w1 }} 1780w, {{ img_url_w0 }}2000{{ img_url_w1 }} 2000w, {{ img_url_w0 }}3000{{ img_url_w1 }} 3000w,{{ img_url_w0 }}3840{{ img_url_w1 }} 3840w, {{ image | image_url }} {{ image.width }}w"
+                    sizes="{{ size_img }}" src="{{ img_url_w0 }}1500{{ img_url_w1 }}"
+                    loading="lazy" onload="loadImageT4s(this)" alt="{{ image.alt | escape }}" width="{{ image.width }}" height="{{ image.height }}">
+                <span class="lazyloadt4s-loader is-bg-img t4s-d-none t4s-d-md-block" style="background: {{ url_img }}"></span>
+            {%- else -%}
+                {{ 'lifestyle-1' | placeholder_svg_tag: 't4s-placeholder-svg t4s-svg-bg1' }}
+            {%- endif -%}
+        </div>
+        {%- if section.blocks.size > 0 -%}
+            {%- for block in section.blocks -%}
+                {%- assign bk_stts = block.settings -%}
+                {%- case block.type -%}
+                    {%- when 'pr' -%}
+                        {%- if bk_stts.product == blank -%}{%- continue -%}{%- endif -%}
+                        <span data-bid="t4s_{{ sid }}{{ block.id }}" data-pin-popup data-position="{{ bk_stts.pos_pin }}" data-is-pr data-href="{{ routes.root_url }}products/{{ bk_stts.product }}" data-sid="render-pr_lb{{ se_stts.pr_pin_des }}" class="t4s-lookbook-pin t4s-lockbook-type__pr t4s-pin-size__{{ bk_stts.pos_size }} t4s-pin-ic_{{ bk_stts.type }} t4s-pin-type_{{ block.id }}" {{ block.shopify_attributes }} {%- render 'pin_position', bk_stts: bk_stts -%}>
+                            <span class="t4s-zoompin"></span>
+                            <span class="t4s-pin-tt">{%- if bk_stts.type != '3' -%}<i class="t4s-pin-link-icon"></i>{%- else -%}<span class="t4s-truncate">{{ bk_stts.shorttxt }}</span>{%- endif -%}</span>
+                        </span>
+                    {%- when 'txt' -%}
+                        <span data-bid="t4s_{{ sid }}{{ block.id }}" data-pin-popup data-position="{{ bk_stts.pos_pin }}" class="t4s-lookbook-pin t4s-lockbook-type__text t4s-pin-size__{{ bk_stts.pos_size }} t4s-pin-ic_{{ bk_stts.type }} t4s-pin-type_{{ block.id }}" {{ block.shopify_attributes }} {%- render 'pin_position', bk_stts: bk_stts -%}>
+                            <span class="t4s-zoompin"></span>
+                            <span class="t4s-pin-tt">{%- if bk_stts.type != '3' -%}<i class="t4s-pin-link-icon"></i>{%- else -%}<span class="t4s-truncate">{{ bk_stts.shorttxt }}</span>{%- endif -%}</span>
+                        </span>
+                        <template id="temt4s_{{ sid }}{{ block.id }}">
+                            <div data-pin-wrapper id="" class="t4s-lb__wrapper t4s-lb-txt-wrapper">
+                                <div class="t4s-lb-arrow"></div>
+                                <div class="t4s-lb__header">
+                                    <span class="t4s-lb__title">{{ 'sections.lookbook.title.text' | t }}</span>
+                                    <button data-pin-close aria-label="{{ 'general.aria.close' | t }}"><svg role="presentation" class="t4s-iconsvg-close" viewBox="0 0 16 14"><path d="M15 0L1 14m14 0L1 0" stroke="currentColor" fill="none" fill-rule="evenodd"></path></svg></button>
+                                </div>
+                                <div class="t4s-lb__content">
+                                    <div class="t4s-lb-title">{{ bk_stts.heading }}</div>
+                                <div class="t4s-lb-content">{{ bk_stts.text }}</div>
+                                </div>
+                            </div>
+                        </template>
+                {%- when 'url' -%}
+                    <a href="{{ bk_stts.url }}" target="{{ bk_stts.open_link }}" class="t4s-lookbook-pin t4s-lockbook-type__link t4s-pin-size__{{ bk_stts.pos_size }} t4s-pin-ic_{{ bk_stts.type }} t4s-pin-type_{{ block.id }}" {%- render 'pin_position', bk_stts: bk_stts -%}>
+                        <span class="t4s-zoompin"></span>
+                        <span class="t4s-pin-tt">{%- if bk_stts.type != '3' -%}<i class="t4s-pin-link-icon"></i>{%- else -%}<span class="t4s-truncate">{{ bk_stts.shorttxt }}</span>{%- endif -%}</span>
+                    </a>
+                {%- endcase -%}
+            {%- endfor -%}
+        {%- endif -%}
+    </div>
+    {{- html_layout[1] -}}
+</div>
+{% schema %}
+{
+    "name": "Lookbook single",
+    "class": "t4s-section t4s-section-all t4s_tp_lb t4s-lookbook-single",
+    "max_blocks": 40,
+    "settings": [
+       {
+            "type": "header",
+            "content": "1.Heading options"
+        },
+        {
+            "type": "select",
+            "id": "design_heading",
+            "label": "Heading design",
+            "default": "1",
+            "options": [
+                {
+                    "value": "1",
+                    "label": "Design 01"
+                },
+                {
+                    "value": "2",
+                    "label": "Design 02"
+                },
+                {
+                    "value": "3",
+                    "label": "Design 03"
+                },
+                {
+                    "value": "4",
+                    "label": "Design 04"
+                },
+                {
+                    "value": "5",
+                    "label": "Design 05"
+                },
+                {
+                    "value": "6",
+                    "label": "Design 06 (width line-awesome)"
+                },
+                {
+                    "value": "7",
+                    "label": "Design 07"
+                },
+                {
+                    "value": "8",
+                    "label": "Design 08"
+                },
+                {
+                    "value": "9",
+                    "label": "Design 09"
+                },
+                {
+                    "value": "10",
+                    "label": "Design 10"
+                },
+                {
+                    "value": "11",
+                    "label": "Design 11"
+                },
+                {
+                    "value": "12",
+                    "label": "Design 12"
+                },
+                {
+                    "value": "13",
+                    "label": "Design 13"
+                },
+                {
+                    "value": "14",
+                    "label": "Design 14"
+                },
+                {
+                    "value": "15",
+                    "label": "Design 15"
+                }
+            ]
+        },
+        {
+            "type": "checkbox",
+            "id": "heading_center",
+            "label": "Center heading align",
+            "default": true
+        },
+        {
+            "type": "text",
+            "id": "top_heading",
+            "label": "Heading"
+        },
+        {
+            "type": "text",
+            "id": "icon_heading",
+            "label": "Enter a name icon",
+            "info": "Only used for design 6 [LineAwesome](https://kalles.the4.co/font-lineawesome/)",
+            "default": "las la-gem"
+        },
+        {
+            "type": "richtext",
+            "id": "top_subheading",
+            "label": "Subheading"
+        },
+        {
+            "type": "number",
+            "id": "tophead_mb",
+            "label": "Bottom space (Desktop)(px)",
+            "info": "The vertical spacing between heading and content.",
+            "default": 30
+        },
+        {
+            "type": "number",
+            "id": "tophead_mb_tb",
+            "label": "Bottom space (Tablet)(px)",
+            "info": "The spacing is between the heading and the content",
+            "default": 30
+        },
+        {
+            "type": "number",
+            "id": "tophead_mb_mb",
+            "label": "Bottom space (Mobile)(px)",
+            "info": "The spacing is between the heading and the content",
+            "default": 25
+        },
+        {
+          "type": "header",
+          "content": "2. Image lookbook"
+        }, 
+        {
+            "type": "select",
+            "id": "img_size",
+            "label": "Image size",
+            "options": [
+                {
+                    "value": "1",
+                    "label": "Full screen"
+                }, {
+                    "value": "2",
+                    "label": "Auto"
+                }
+            ]
+        }, 
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Choose Image"
+        }, 
+        {
+            "type": "image_picker",
+            "id": "image_mb",
+            "label": "Image mobile"
+        }, 
+        {
+            "type": "header",
+            "content": "3. Pin product design"
+        }, 
+        {
+            "type": "select",
+            "id": "pr_pin_des",
+            "options": [
+                {
+                    "value": "1",
+                    "label": "Design 1"
+                },
+                {
+                    "value": "2",
+                    "label": "Design 2"
+                },
+                {
+                    "value": "3",
+                    "label": "Design 3"
+                },
+                {
+                    "value": "4",
+                    "label": "Design 4"
+                }, 
+                {
+                    "value": "5",
+                    "label": "Design 5"
+                }, 
+                {
+                    "value": "6",
+                    "label": "Design 6"
+                }
+            ],
+          "label": "Pin product design",
+          "default": "1"
+        }, 
+        {
+          "type": "header",
+          "content": "4. Design options"
+        },  
+        {
+            "type": "select","id": "layout","default": "t4s-container-wrap","label": "Layout",
+            "options": [
+                { "value": "t4s-se-container", "label": "Container"},
+                { "value": "t4s-container-wrap", "label": "Wrapped container"},
+                { "value": "t4s-container-fluid", "label": "Full width"}
+            ]
+        },
+        {
+            "type": "color",
+            "id": "cl_bg",
+            "label": "Background"
+        },
+        {
+            "type": "color_background",
+            "id": "cl_bg_gradient",
+            "label": "Background gradient"
+        },
+        {
+            "type": "image_picker",
+            "id": "image_bg",
+            "label": "Background image"
+        },
+        {
+            "type": "text",
+            "id": "mg",
+            "label": "Margin",
+            "info": "Margin top, margin right, margin bottom, margin left. If you do not use it please blank.",
+            "default": ",,50px,",
+            "placeholder": ",,50px,"
+        },
+        {
+            "type": "text",
+            "id": "pd",
+            "label": "Padding",
+            "info": "Padding top, padding right, padding bottom, padding left. If you do not use it please blank.",
+            "placeholder": "50px,,50px,"
+        },
+        {
+            "type": "header",
+            "content": "+ Design tablet options"
+        },
+        {
+            "type": "text",
+            "id": "mg_tb",
+            "label": "Margin",
+            "default": ",,50px,",
+            "placeholder": ",,50px,"
+        },
+        {
+            "type": "text",
+            "id": "pd_tb",
+            "label": "Padding",
+            "placeholder": "50px,,50px,"
+        },
+        {
+            "type": "header",
+            "content": "+ Design mobile options"
+        },
+        {
+            "type": "text",
+            "id": "mg_mb",
+            "label": "Margin",
+            "default": ",,30px,",
+            "placeholder": ",,50px,"
+        },
+        {
+            "type": "text",
+            "id": "pd_mb",
+            "label": "Padding",
+            "placeholder": ",,50px,"
+        }
+    ],
+      "blocks": [
+        {
+          "type": "pr",
+          "name": "Product",
+          "settings": [
+            {
+                "type": "paragraph",
+                "content": "+ Desktop"
+            },
+            {
+                "type": "range",
+                "id": "pos_t",
+                "min": 0,
+                "max": 100,
+                "step": 1,
+                "unit": "%",
+                "label": "Position top",
+                "default": 50
+            },
+            {
+                "type": "range",
+                "id": "pos_l",
+                "min": 0,
+                "max": 100,
+                "step": 1,
+                "unit": "%",
+                "label": "Position left",
+                "default": 50
+            },
+            {
+                "type": "paragraph",
+                "content": "+ Mobile"
+            },
+            {
+                "type": "range",
+                "id": "pos_t_mb",
+                "min": 0,
+                "max": 100,
+                "step": 1,
+                "unit": "%",
+                "label": "Position top",
+                "default": 50
+            },
+            {
+                "type": "range",
+                "id": "pos_l_mb",
+                "min": 0,
+                "max": 100,
+                "step": 1,
+                "unit": "%",
+                "label": "Position left",
+                "default": 50
+            },
+            {
+                "type": "select",
+                "id": "type",
+                "label": "Title type",
+                "options": [
+                    {
+                        "value": "1",
+                        "label": "icon 1"
+                    }, 
+                    {
+                        "value": "2",
+                        "label": "icon 2"
+                    }, 
+                    {
+                        "value": "3",
+                        "label": "Short text"
+                    }
+                ]
+            }, 
+            {
+              "type": "text",
+              "id": "shorttxt",
+              "label": "Short text",
+              "default": "$59"
+            }, 
+            {
+                "type": "select",
+                "id": "pos_pin",
+                "label": "Position pin wrapper",
+                "default": "top",
+                "options": [
+                    { "value": "top", "label": "Top"},
+                    { "value": "bottom", "label": "Bottom"},
+                    { "value": "left", "label": "Left"},
+                    { "value": "right", "label": "Right"}
+                ]
+            }, 
+            {
+              "type": "select",
+              "id": "pos_size",
+              "label": "Pin size",
+              "default": "medium",
+              "options": [
+                {
+                  "value": "small",
+                  "label": "Small"
+                }, {
+                  "value": "medium",
+                  "label": "Medium"
+                }, {
+                  "value": "exmedium",
+                  "label": "Large"
+                }, {
+                  "value": "large",
+                  "label": "Extra large"
+                }
+              ]
+            }, {
+              "type": "color",
+              "id": "bg_cl",
+              "label": "Background color",
+              "default": "#b59677"
+            }, {
+              "type": "color",
+              "id": "cl_text",
+              "label": "Icon/Text color",
+              "default": "#fff"
+            }, {
+              "type": "product",
+              "id": "product",
+              "label": "Choose product"
+            }
+          ]
+        }, {
+          "type": "txt",
+          "name": "Text",
+          "settings": [
+            {
+                "type": "paragraph",
+                "content": "+ Desktop"
+            },
+            {
+              "type": "range",
+              "id": "pos_t",
+              "min": 0,
+              "max": 100,
+              "step": 1,
+              "unit": "%",
+              "label": "Position top",
+              "default": 50
+            },
+            {
+              "type": "range",
+              "id": "pos_l",
+              "min": 0,
+              "max": 100,
+              "step": 1,
+              "unit": "%",
+              "label": "Position left",
+              "default": 50
+            },
+            {
+                "type": "paragraph",
+                "content": "+ Mobile"
+            },
+            {
+                "type": "range",
+                "id": "pos_t_mb",
+                "min": 0,
+                "max": 100,
+                "step": 1,
+                "unit": "%",
+                "label": "Position top",
+                "default": 50
+            },
+            {
+                "type": "range",
+                "id": "pos_l_mb",
+                "min": 0,
+                "max": 100,
+                "step": 1,
+                "unit": "%",
+                "label": "Position left",
+                "default": 50
+            },
+            {
+              "type": "select",
+              "id": "type",
+              "label": "Title type",
+              "options": [
+                {
+                  "value": "1",
+                  "label": "icon 1"
+                }, {
+                  "value": "2",
+                  "label": "icon 2"
+                }, {
+                  "value": "3",
+                  "label": "Short text"
+                }
+              ]
+            }, 
+            {
+              "type": "text",
+              "id": "shorttxt",
+              "label": "Short text",
+              "default": "$59"
+            }, 
+            {
+                "type": "select",
+                "id": "pos_pin",
+                "label": "Position pin wrapper",
+                "default": "top",
+                "options": [
+                    { "value": "top", "label": "Top"},
+                    { "value": "bottom", "label": "Bottom"},
+                    { "value": "left", "label": "Left"},
+                    { "value": "right", "label": "Right"}
+                ]
+            }, 
+            {
+              "type": "select",
+              "id": "pos_size",
+              "label": "Pin size",
+              "default": "medium",
+              "options": [
+                {
+                  "value": "small",
+                  "label": "Small"
+                }, {
+                  "value": "medium",
+                  "label": "Medium"
+                }, {
+                  "value": "exmedium",
+                  "label": "Large"
+                }, {
+                  "value": "large",
+                  "label": "Extra large"
+                }
+              ]
+            }, {
+              "type": "color",
+              "id": "bg_cl",
+              "label": "Background color",
+              "default": "#b59677"
+            }, {
+              "type": "color",
+              "id": "cl_text",
+              "label": "Icon/Text color",
+              "default": "#fff"
+            }, {
+              "type": "text",
+              "id": "heading",
+              "label": "Heading",
+              "default": "01 - Water Resistance"
+            }, {
+              "type": "richtext",
+              "id": "text",
+              "label": "Content",
+              "default": "<p>With groundbreaking water resistant capabilities, The Mission has the highest waterproof rating of any smartwatch on the market.</p>"
+            }
+          ]
+        }, {
+          "type": "url",
+          "name": "Link",
+          "settings": [
+            {
+                "type": "paragraph",
+                "content": "+ Desktop"
+            },
+            {
+              "type": "range",
+              "id": "pos_t",
+              "min": 0,
+              "max": 100,
+              "step": 1,
+              "unit": "%",
+              "label": "Position top",
+              "default": 50
+            },
+            {
+              "type": "range",
+              "id": "pos_l",
+              "min": 0,
+              "max": 100,
+              "step": 1,
+              "unit": "%",
+              "label": "Position left",
+              "default": 50
+            },
+            {
+                "type": "paragraph",
+                "content": "+ Mobile"
+            },
+            {
+                "type": "range",
+                "id": "pos_t_mb",
+                "min": 0,
+                "max": 100,
+                "step": 1,
+                "unit": "%",
+                "label": "Position top",
+                "default": 50
+            },
+            {
+                "type": "range",
+                "id": "pos_l_mb",
+                "min": 0,
+                "max": 100,
+                "step": 1,
+                "unit": "%",
+                "label": "Position left",
+                "default": 50
+            },
+            {
+              "type": "select",
+              "id": "type",
+              "label": "Title type",
+              "options": [
+                {
+                  "value": "1",
+                  "label": "icon 1"
+                }, {
+                  "value": "2",
+                  "label": "icon 2"
+                }, {
+                  "value": "3",
+                  "label": "Short text"
+                }
+              ]
+            }, {
+              "type": "text",
+              "id": "shorttxt",
+              "label": "Short text",
+              "default": "$59"
+            }, {
+              "type": "select",
+              "id": "pos_size",
+              "label": "Pin size",
+              "default": "medium",
+              "options": [
+                {
+                  "value": "small",
+                  "label": "Small"
+                }, {
+                  "value": "medium",
+                  "label": "Medium"
+                }, {
+                  "value": "exmedium",
+                  "label": "Large"
+                }, {
+                  "value": "large",
+                  "label": "Extra large"
+                }
+              ]
+            }, {
+              "type": "color",
+              "id": "bg_cl",
+              "label": "Background color",
+              "default": "#b59677"
+            }, {
+              "type": "color",
+              "id": "cl_text",
+              "label": "Icon/Text color",
+              "default": "#fff"
+            }, {
+              "type": "header",
+              "content": "+ Popup options"
+            }, {
+              "type": "url",
+              "id": "url",
+              "label": "Link"
+            }, {
+              "type": "select",
+              "id": "open_link",
+              "options": [
+                {
+                  "value": "_self",
+                  "label": "Current window"
+                }, {
+                  "value": "_blank",
+                  "label": "New window"
+                }
+              ],
+              "label": "Open link in",
+              "default": "_blank"
+            }
+          ]
+        }
+      ],
+        "presets": [
+            {
+                "name": "Lookbook single",
+                "category": "group6"
+            }
+        ]
+    }
+{% endschema %}

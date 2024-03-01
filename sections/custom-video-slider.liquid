@@ -1,0 +1,62 @@
+<div class="ctm-video-slider-section">
+ <div class="page-width">
+
+   <h2>{{ section.settings.video_section_title }}</h2>
+   
+    
+  <div class="row align-items-center"> 
+    
+    {% for block in section.blocks %}
+  {% if block.type == 'video_slider_box' %}
+    <div class="ctm-video-slider-box">
+        <video controls>
+ {%- for media in section.settings.video.sources -%}
+                <source src="{{ media.url }}" type="{{ media.mime_type }}">
+              {%- endfor -%}
+</video>
+      
+        </div>
+    {% endif %} 
+  {% endfor %}
+
+    
+    </div>
+
+  </div>
+  
+ </div>
+</div>
+
+{% schema %}
+{
+  "name": "Custom Author Section",
+  "settings": [
+    {
+      "type": "text",
+      "label": "Video Section Title",
+      "id": "video_section_title",
+      "default": "Image Boxes"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video_slider_box",
+      "name": "Video Slider Box",
+      "settings": [
+        {
+          "type": "video",
+          "id": "video",
+          "label": "A Shopify Hosted video"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Video Slider Section",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+

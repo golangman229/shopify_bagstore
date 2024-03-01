@@ -1,0 +1,12 @@
+<div class="t4s-quote-wrap">
+    {%- if bk_stts.image_avata -%}
+        {%- assign image = bk_stts.image_avata -%} 
+        <div class="t4s-quote-avatar lazyloadt4s" data-bgset="{{ image | image_url: width: 1 }}" data-sizes="auto" data-optimumx="2" style="background-image: url({{ image | image_url: width: 1 }};"></div>
+    {%- endif -%}
+    <div class="t4s-quote-content t4s-rte">
+        {%- render 'rating_star', rating: bk_stts.rating -%}
+        {{ bk_stts.content }}
+        <div class="t4s-quote-author">{{ bk_stts.title }}</div>
+        {%- if bk_stts.pos != blank -%}<div class="t4s-quote-position">{{ bk_stts.pos }}</div>{%- endif -%} 
+    </div>
+</div>

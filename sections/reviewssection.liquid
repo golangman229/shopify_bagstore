@@ -1,0 +1,164 @@
+<div class="container-fluid testiiis">
+  <div class="row">
+        <div class="col-sm-4">
+          <h2>{{ section.settings.section_title }} </h2>
+          <img src="https://cdn.shopify.com/s/files/1/0569/1310/0889/files/Frame_1818.png?v=1706697891" alt="asd"/>
+
+          <a href="{{ section.settings.button_link }}" class="abtlink">ABOUT US</a>
+        </div>
+
+<!-- <div class="col-sm-3">
+          <a href="{{ section.settings.discover_link }}" class="disbtn"><img src="{{ section.settings.discover_image | img_url:'master' }}" alt="asd"></a>
+        </div>
+ -->
+        <div class="col-sm-8">
+<div class="row">
+<div class="col-sm-11" style="padding-right: 0px;">
+      
+            <div class="slider slider-for">
+              {% for block in section.blocks %}
+          {% if block.type == 'testimonial' %}
+            <div>
+            <div class="row">
+                <div class="col-sm-5">
+          <a href="{{ block.settings.discover_link }}" class="disbtn"><img src="{{ block.settings.discover_image | img_url:'master' }}" alt="asd"></a>
+        </div>
+            <div class="col-sm-7">
+              <div>
+                <img src="{{ block.settings.testimonial_image | img_url:'master' }}" alt="asd">
+                <p>{{ block.settings.testimonial_description}}</p>
+                <h4>{{ block.settings.testimonial_name}}</h4>
+              </div>
+
+              </div>
+              </div>
+                            </div>
+             {% endif %}
+{% endfor %}
+            </div>
+
+  </div>
+
+     <div class="col-sm-1 ">
+             <div class="slider slider-nav">
+                {% for block in section.blocks %}
+          {% if block.type == 'testimonial' %}
+              <div><img src="{{ block.settings.testimonial_image | img_url:'master' }}" alt="asd"></div>
+                         {% endif %}
+{% endfor %}
+            </div>
+     </div>
+</div>
+
+
+        </div>
+  </div>
+</div>
+
+<style>
+
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+<script>
+  jQuery('.slider-for').slick({
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  arrows: false,
+  dots: false,
+  fade: true,
+  asNavFor: '.slider-nav',
+  autoplay: true,  // Enable autoplay
+  autoplaySpeed: 7000  // Set autoplay delay to 3 seconds (3000 milliseconds)
+});
+
+jQuery('.slider-nav').slick({
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  infinite: false,
+  asNavFor: '.slider-for',
+  dots: false,
+  arrows: false,
+  focusOnSelect: true
+});
+
+// Filter function to exclude cloned slides
+var filterNotCloned = function(index) {
+  return !jQuery(this).hasClass('slick-cloned');
+};
+
+// Apply the filter to both sliders
+jQuery('.slider-for').slick('slickFilter', filterNotCloned);
+jQuery('.slider-nav').slick('slickFilter', filterNotCloned);
+
+jQuery('a').click(function(e) {
+  e.preventDefault(e);
+  var slideno = jQuery(this).data('slide');
+  $('.slider-nav').slick('slickGoTo', slideno - 1);
+});
+</script>
+   {% schema %}
+{
+  "name": "My Reviews",
+  "settings": [
+    {
+      "type": "text",
+      "label": "Reviews Title",
+      "id": "section_title",
+      "default": "My Testimonial"
+    },
+    {
+      "type": "text",
+      "label": "Button Link",
+      "id": "button_link",
+      "default": "Button Link"
+    }
+    
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial Slide",
+      "settings": [
+         {
+          "type": "text",
+          "label": "testimonial Name",
+          "id": "testimonial_name",
+          "default": "testimonial Name"
+        },
+        
+        {
+          "type": "text",
+          "label": "testimonial Description",
+          "id": "testimonial_description",
+          "default": "testimonial Description"
+        },
+        
+        {
+      "type": "image_picker",
+      "label": "Testimonial Image",
+      "id": "testimonial_image"
+        },
+        {
+      "type": "image_picker",
+      "label": "Discover Image",
+      "id": "discover_image"
+    },
+    {
+      "type": "text",
+      "label": "Discover Link",
+      "id": "discover_link",
+      "default": "Link Here"
+    }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "my-testimonial-slider",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

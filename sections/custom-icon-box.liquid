@@ -1,0 +1,70 @@
+<div class="ctm-icon-box">
+ <div class="t4s-container">
+       <h2 class="section-title"> {{ section.settings.section_title }} </h2>
+   <div class="row align-items-center">
+
+    {% for block in section.blocks %}
+  {% if block.type == 'icon_box' %}
+    
+      <div class="ctm-icon-box ctm-title-and-text">
+         <img src="{{ block.settings.image_with_text | img_url:'master' }}" alt="asd">
+        <h2>{{ block.settings.image_title }}</h2>
+      </div>
+  
+    {% endif %} 
+  {% endfor %}
+
+  </div>
+
+ </div>
+</div>
+
+{% schema %}
+{
+  "name": "Custom Icon Box",
+  "settings": [
+    {
+      "type": "text",
+      "label": "Section Title",
+      "id": "section_title",
+      "default": "Image Boxes"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "icon_box",
+      "name": "Icon Box",
+      "settings": [
+        {
+           "type": "image_picker",
+           "id": "image_with_text",
+           "label": "Image"
+        },
+        {
+          "type": "text",
+          "label": "Image Title",
+          "id": "image_title",
+          "default": "Image Title"
+        },
+         {
+          "type": "inline_richtext",
+          "label": "Paragraph 01",
+          "id": "image_text01"
+        },
+        {
+          "type": "inline_richtext",
+          "label": "Paragraph 02",
+          "id": "image_text02"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Icon Box Section",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+

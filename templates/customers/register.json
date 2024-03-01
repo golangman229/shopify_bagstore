@@ -1,0 +1,69 @@
+{
+  "sections": {
+    "heading": {
+      "type": "heading-static",
+      "blocks": {
+        "5ceb80b4-7249-43c6-bab2-723276f6f6a2": {
+          "type": "1",
+          "settings": {
+            "tag": "h3",
+            "fontf": "2",
+            "text_cl": "#ffffff",
+            "text_fs": 20,
+            "text_lh": 26,
+            "text_fw": 500,
+            "text_ls": 2,
+            "mgb": 0,
+            "font_italic": false,
+            "font_uppercase": false,
+            "text_shadow": false,
+            "text_fs_tb": 20,
+            "text_lh_tb": 26,
+            "text_ls_tb": 2,
+            "mgb_tb": 0,
+            "hidden_mobile": false,
+            "text_fs_mb": 20,
+            "text_lh_mb": 26,
+            "text_ls_mb": 2,
+            "mgb_mb": 0
+          }
+        }
+      },
+      "block_order": [
+        "5ceb80b4-7249-43c6-bab2-723276f6f6a2"
+      ],
+      "settings": {
+        "parallax": false,
+        "bg_overlay": "#000",
+        "bg_opacity": 54,
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "padding_top_tb": 50,
+        "padding_bottom_tb": 50,
+        "padding_top_mb": 50,
+        "padding_bottom_mb": 50,
+        "bg_pos": "center center",
+        "bg_repeat": "no-repeat",
+        "bg_size": "cover",
+        "mgb": 50,
+        "mgb_tb": 50,
+        "mgb_mb": 50
+      }
+    },
+    "main": {
+      "type": "main-customers-register",
+      "settings": {
+        "content_align": "start",
+        "btn_width": "full",
+        "button_style": "outline",
+        "btns_size": "medium",
+        "btns_cl": "dark",
+        "button_effect": "overlay-run"
+      }
+    }
+  },
+  "order": [
+    "heading",
+    "main"
+  ]
+}

@@ -1,0 +1,49 @@
+{%- if se_blocks.size > 0 -%}
+  {%- liquid 
+    capture heading_title
+        case request.page_type
+            when 'cart'
+                echo 'cart.cart_page.title' | t
+            when 'page'
+                echo page.title | default: page_title | escape
+            when 'customers/login'
+                echo 'customer.login.title' | t
+            when 'customers/register'
+                echo 'customer.register.title' | t
+            when 'customers/activate_account'
+                echo 'customer.activate_account.title' | t
+            when 'customers/reset_password'
+                echo 'customer.reset_password.title' | t
+            when 'customers/order'
+                echo 'customer.order.title' | t: name: order.name
+            when 'customers/addresses'
+                echo 'customer.addresses.title' | t
+            when 'customers/account'
+                echo 'customer.account.title' | t
+            else
+                echo page.title | escape
+        endcase
+    endcapture 
+ -%}
+{%- capture html_page -%}
+    {%- for block in se_blocks -%}{%- assign bk_stts = block.settings -%}
+        {%- case block.type -%}
+            {%- when '1' -%}
+                {%- assign heading_title = heading_title | default: bk_stts.heading -%}
+                <{{ bk_stts.tag }} class="t4s-title-head t4s-bl-item t4s-animation-none t4s-text-bl t4s-fnt-fm-{{ bk_stts.fontf }} t4s-font-italic-{{ bk_stts.font_italic }} t4s-uppercase-{{ bk_stts.font_uppercase }} t4s-hidden-mobile-{{ bk_stts.hidden_mobile }} t4s-text-shadow-{{ bk_stts.text_shadow }}" data-lh="{{ bk_stts.text_lh_mb }}" data-lh-md="{{ bk_stts.text_lh_tb }}" data-lh-lg="{{ bk_stts.text_lh }}" {%- render 'bk_cus_style', type: 'custom_text', bk_stts: bk_stts -%}>{{ heading_title }}</{{ bk_stts.tag }}>
+            {%- when '2' -%}
+                {%- if bk_stts.content == blank -%}{%- continue -%}{%- endif -%}<div class="t4s-desc-head t4s-bl-item t4s-animation-none t4s-text-bl t4s-fnt-fm-{{ bk_stts.fontf }} t4s-font-italic-{{ bk_stts.font_italic }} t4s-uppercase-{{ bk_stts.font_uppercase }} t4s-hidden-mobile-{{ bk_stts.hidden_mobile }} t4s-text-shadow-{{ bk_stts.text_shadow }} t4s-rte" data-lh="{{ bk_stts.text_lh_mb }}" data-lh-md="{{ bk_stts.text_lh_tb }}" data-lh-lg="{{ bk_stts.text_lh }}" {%- render 'bk_cus_style', type: 'custom_text', bk_stts: bk_stts -%}>{{ bk_stts.content }}</div>
+            {%- when '3' -%}
+                <nav class="t4s-breadcrumbs" role="navigation" aria-label="breadcrumbs" style="--brc-cl-link:{{ bk_stts.breadcrumb_color_link }};--brc-cl:{{ bk_stts.breadcrumb_color }};--brc-mgb:{{ bk_stts.brc_mgb }}px;--brc-mgb-tb:{{ bk_stts.brc_mgb_tb }}px;--brc-mgb-mb:{{ bk_stts.brc_mgb_mb }}px;">
+                    <ul class="t4s-breadcrumbs__list">
+                        <li class="t4s-breadcrumbs__item">
+                            <a href="{{ routes.root_url }}" class="t4s-d-inline-block">{{ 'general.breadcrumb.home' | t }}</a> <svg class="t4s-icon-arrow" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180)"></path></svg>
+                        </li>
+                        <li class="t4s-breadcrumbs__item">{{ heading_title }}</li> 
+                    </ul>
+                </nav> 
+        {%- endcase -%} 
+    {%- endfor -%}
+{%- endcapture -%}
+<div class="t4s-page-head t4s-oh t4s-text-center"><div class="t4s-container t4s-pr t4s-z-100">{{ html_page }}</div></div>
+{%- endif -%} 

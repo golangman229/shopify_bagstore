@@ -1,0 +1,6 @@
+shopify theme dev -s carry-type --password shptka_647d7fba0a6b9b3ce243d915fb94bcbd
+
+https://www.figma.com/file/OkOeWTqX4I4y1jREmVb7Ka/Carry-Type?type=design&node-id=123-14&mode=design&t=u3CSEJaAH9pMxKkG-0
+
+dmarkovicfl@gmail.com
+1qazxsw2!QAZ

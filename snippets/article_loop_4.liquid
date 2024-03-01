@@ -1,0 +1,69 @@
+{%- assign image = article.image -%}
+{%- assign article_url = article.url -%}
+<article class="t4s-col-item t4s-article t4s-article-item t4s-article-des-4">
+	<div class="t4s-article-inner" timeline hdt-reveal="slide-in">
+		{%- if image != blank -%}
+			<div class="t4s-article-thumb t4s-pr">
+				<a class="t4s-eff t4s-eff-{{ b_effect }} t4s-eff-img-{{ img_effect }} t4s-d-block" href="{{ article_url }}">
+					<div class="t4s_ratio t4s-bg-11" style="background: url({{ image | image_url: width: 1 }});--aspect-ratioapt: {{ image.aspect_ratio | default: 2 }}"  data-cacl-slide>
+						<img class="lazyloadt4s t4s-lz--fadeIn t4s-obj-eff" data-src="{{ image | image_url: width: 1 }}" data-widths="[400,600,700,800,900,1000,1200,1400,1600]" data-optimumx="2" data-sizes="auto" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="{{ image.width }}" height="{{ image.height }}" alt="{{ image.alt | escape }}" loading="lazy">
+					</div>
+				</a>
+				{%- if show_cate -%}
+					{%- assign article_tags = article.tags | join: ';' | split: ';' -%}
+					{%- assign tag_category = article_tags | where: 'category_' | first -%}
+					<div class="t4s-categories">
+						{%- if tag_category != blank -%} 
+							<a href="{{ blog_url }}/tagged/{{ tag_category | handle }}" class="t4s-article-text-color">{{ tag_category | remove: 'category_' | strip }}</a> 
+						{%- else -%}
+							<a href="{{ blog_url }}" class="t4s-article-text-color">{{ blog.title }}</a> 
+						{%- endif -%}
+					</div> 
+				{%- endif -%}
+                <div class="t4s-article-info">
+                    <div class="t4s-article-metas">
+                        {%- if show_au -%}
+                            <span class="t4s-article-author">{{ by_txt }}
+                            <span class="t4s-author-name">{{ article.author | replace_first: 'ad clnt', 'admin' }}</span>
+                            </span>
+                        {%- endif -%}
+                        {%- if show_tags -%}
+                            <span class="t4s-article-tags">
+                                {%- for tag in article.tags limit: 3 -%} 
+                                    <a href="{{ blog_url }}/tagged/{{ tag | handle }}" class="t4s-article-text-color">{{ tag | remove : 'category_' | strip }}</a> {%- unless forloop.last -%} ,  {% endunless -%}
+                                {%- endfor -%} 
+                            </span>
+                        {%- endif -%}
+                        {%- if show_cm -%}
+                            <span class="t4s-article-comment"> {{ 'blogs.comments.with_count_html' | t: count: article.comments_count }}</span>
+                        {%- endif -%}
+                    </div>
+                    <h3 class="t4s-article-title"><a href="{{ article_url }}" class="t4s-article-text-color">{{ article.title }}</a></h3>
+                    {%- if show_dt -%}
+                        <span class="t4s-article-time"> {{ on_txt }}
+                            <span> 
+                                {%- if date contains "%" -%}
+                                    {{ article.published_at | time_tag: date }}
+                                {%- else -%}	
+                                    {{ article.published_at | time_tag: format: date }}
+                                {%- endif -%}
+                            </span>
+                        </span>
+                    {%- endif -%}
+                </div>
+			</div>
+		{%- endif -%}
+        <div class="t4s-article-content t4s-rte">
+            {%- if show_cnt -%}
+                {%- if article.excerpt.size > 0 -%}{{ article.excerpt }}{%- else -%}{{ article.content | strip_html | truncate: 118 }}{%- endif -%}
+            {%- endif -%}
+            {%- if show_rm -%}
+                <div class="t4s-article-btn-readmore">
+                    <a href="{{ article_url }}" class="t4s-article-readmore">{{ readmore_txt }} 
+                    {%- if show_irm -%}<svg width="24" height="24" viewBox="0 0 24 24" fill="transparent"><path d="M1 12H15" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 8L16 12L12 16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>{%- endif -%}
+                    </a>
+                </div>
+            {%- endif -%}
+        </div>
+	</div>
+</article>

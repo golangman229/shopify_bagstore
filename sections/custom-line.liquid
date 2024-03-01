@@ -1,0 +1,149 @@
+<!-- sections/custom-line.liquid -->
+{{ 't4s-section.css' | asset_url | stylesheet_tag }}
+{%- liquid
+    assign stt_layout = section.settings.layout
+    if stt_layout == 't4s-container-wrap'
+        assign html_layout = '<div class="t4s-container">__</div>' | split: '__'
+    else
+        assign html_layout = '__' | split: '__'
+    endif
+ -%} 
+<div class="t4s-section-inner t4s_nt_se_{{ section.id }} {{ stt_layout }} {{ section.settings.line_pos }}" {% render 'section_style', se_stts: section.settings -%}> 
+    {{- html_layout[0] -}}
+        <div class="t4s-custom-line" timeline hdt-reveal="slide-in"></div>
+    {{- html_layout[1] -}}
+</div>
+{%- style -%}
+  .t4s_nt_se_{{ section.id }} .t4s-custom-line {
+    width: {{ section.settings.line_width }}%;
+    border-style: {{ section.settings.line_style }};
+    border-top-width: {{ section.settings.line_height }}px;
+    border-color: {{ section.settings.line_cl }};
+  }
+{%- endstyle -%}
+{% schema %}
+  {
+    "name": "Custom line",
+    "tag": "section",
+    "class": "t4s-section t4s-line-section",
+    "settings": [
+        {
+            "type": "header",
+            "content": "1. General options"
+        },
+        {
+            "type": "select",
+            "id": "line_style",
+            "label": "Line style",
+            "default": "solid",
+            "options": [
+            {
+                "value": "solid",
+                "label": "Solid"
+            },
+            {
+                "value": "dotted",
+                "label": "Dotted"
+            },
+            {
+                "value": "dashed",
+                "label": "Dashed"
+            },
+            {
+                "value": "double",
+                "label": "Double"
+            },
+            {
+                "value": "groove",
+                "label": "Groove"
+            }
+            ]
+        }, 
+        {
+            "type": "range",
+            "id": "line_width",
+            "min": 1,
+            "max": 100,
+            "step": 1,
+            "label": "Line width",
+            "unit": "%",
+            "default": 100
+        }, 
+        {
+            "type": "range",
+            "id": "line_height",
+            "min": 1,
+            "max": 15,
+            "step": 0.5,
+            "label": "Line height",
+            "unit": "px",
+            "default": 1
+        },
+        {
+            "type": "color",
+            "id": "line_cl",
+            "label": "Line color",
+            "default": "#e6e6e6"
+        },
+        {
+            "type": "select",
+            "id": "line_pos",
+            "label": "Line position",
+            "default": "t4s-text-start",
+            "options": [
+            {
+                "value": "t4s-text-start",
+                "label": "Left"
+            },
+            {
+                "value": "t4s-text-center",
+                "label": "Center"
+            },
+            {
+                "value": "t4s-text-end",
+                "label": "Right"
+            }
+            ]
+        },
+        {
+            "type": "header",
+            "content": "2. Design options"
+        },
+        {
+            "type": "select","id": "layout","default": "t4s-container-wrap","label": "Layout",
+            "options": [
+                { "value": "t4s-container-wrap", "label": "Wrapped container"},
+                { "value": "t4s-container-fluid", "label": "Full width"}
+            ]
+        },
+        {
+            "type": "text",
+            "id": "mg",
+            "label": "Margin",
+            "info":"Margin top, margin right, margin bottom, margin left. If you not use to blank",
+            "default": ",,50px,",
+            "placeholder": ",,50px,"
+        },
+        {
+            "type": "text",
+            "id": "mg_tb",
+            "label": "Margin",
+            "default": ",,50px,",
+            "placeholder": ",,50px,"
+        },
+        {
+            "type": "text",
+            "id": "mg_mb",
+            "default": ",,30px,",
+            "label": "Margin (Mobile)",
+            "placeholder": ",,50px,"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Custom line",
+            "category": "group9"
+        }
+    ]
+}
+{% endschema %}
